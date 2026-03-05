@@ -615,7 +615,8 @@ function doLogout(){
 }
 
 // ═══════════════════ DATA ═══════════════════
-let db = {
+// ═══════════════════ DEFAULT DATA ═══════════════════
+const DB_DEFAULT = {
   tiendas:[
     {id:1,emoji:'💊',nombre:'Farmacia Central',categoria:'Farmacia',tiempo:'1-2 días',rating:'4.9',estado:'Activo'},
     {id:2,emoji:'👗',nombre:'Boutique Moda',categoria:'Ropa y accesorios',tiempo:'2-3 días',rating:'4.7',estado:'Activo'},
@@ -624,31 +625,31 @@ let db = {
     {id:5,emoji:'📚',nombre:'Librería Saber',categoria:'Librería',tiempo:'2-3 días',rating:'4.8',estado:'Activo'},
     {id:6,emoji:'🧴',nombre:'Belleza & Más',categoria:'Belleza y cuidado',tiempo:'1-2 días',rating:'4.7',estado:'Activo'},
   ],
-  clientes:[
-    {id:1,nombre:'María González',telefono:'+507 6100-1234',correo:'maria@correo.com',provincia:'Chiriquí',direccion:'David, Calle 5 Norte',pedidos:3},
-    {id:2,nombre:'Carlos Ruiz',telefono:'+507 6200-5678',correo:'carlos@correo.com',provincia:'Veraguas',direccion:'Santiago, Barrio San José',pedidos:1},
-    {id:3,nombre:'Luisa Herrera',telefono:'+507 6300-9012',correo:'luisa@correo.com',provincia:'Coclé',direccion:'Penonomé, Las Mercedes',pedidos:2},
-  ],
-  pedidos:[
-    {id:1,codigo:'SB-482931',cliente:'María González',tienda:'Farmacia Central',descripcion:'Ibuprofeno 400mg x2, Vitamina C',total:18.50,estado:'En tránsito'},
-    {id:2,codigo:'SB-371820',cliente:'Carlos Ruiz',tienda:'TechZone',descripcion:'Cable USB-C 2m, funda celular',total:24.00,estado:'Entregado'},
-    {id:3,codigo:'SB-295048',cliente:'Luisa Herrera',tienda:'Boutique Moda',descripcion:'Vestido talla M color azul, cartera',total:55.00,estado:'Pendiente'},
-  ],
-  pagos:[
-    {id:1,codigo:'SB-482931',cliente:'María González',monto:27.00,metodo:'Yappy',fecha:'2025-02-20',estado:'Confirmado'},
-    {id:2,codigo:'SB-371820',cliente:'Carlos Ruiz',monto:32.50,metodo:'Transferencia',fecha:'2025-02-18',estado:'Confirmado'},
-    {id:3,codigo:'SB-295048',cliente:'Luisa Herrera',monto:63.50,metodo:'Tarjeta',fecha:'2025-02-25',estado:'Pendiente'},
-  ],
-  envios:[
-    {id:1,codigo:'ENV-001',pedido:'SB-482931',destino:'Chiriquí',direccion:'David, Calle 5 Norte',transportista:'Servi Entrega',estado:'En camino'},
-    {id:2,codigo:'ENV-002',pedido:'SB-371820',destino:'Veraguas',direccion:'Santiago, Barrio San José',transportista:'Transporte Ferguson',estado:'Entregado'},
-  ],
-  nextId:{tiendas:7,clientes:4,pedidos:4,pagos:4,envios:3}
+  clientes:[],
+  pedidos:[],
+  pagos:[],
+  envios:[],
+  nextId:{tiendas:7,clientes:1,pedidos:1,pagos:1,envios:1}
 };
+
+// ═══════════════════ LOCALSTORAGE ═══════════════════
+function saveDB(){
+  try{ localStorage.setItem('shipbuy_db', JSON.stringify(db)); } catch(e){}
+}
+function loadDB(){
+  try{
+    const saved = localStorage.getItem('shipbuy_db');
+    if(saved) return JSON.parse(saved);
+  } catch(e){}
+  return JSON.parse(JSON.stringify(DB_DEFAULT));
+}
+
+let db = loadDB();
 let editId=null, editType=null;
 
 // ═══════════════════ INIT ═══════════════════
 function init(){
+  db = loadDB();
   document.getElementById('dashDate').textContent =
     new Date().toLocaleDateString('es-PA',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   renderAll();
@@ -976,7 +977,7 @@ function saveRecord(){
     }
     toast('Registro agregado ✓','success');
   }
-  closeModal(); renderAll();
+  closeModal(); renderAll(); saveDB();
 }
 
 // ═══════════════════ PRODUCTO ROWS ═══════════════════
@@ -1100,7 +1101,7 @@ function askDelete(type, id){
   document.getElementById('confirmOk').onclick = ()=>{
     const col={tienda:'tiendas',cliente:'clientes',pedido:'pedidos',pago:'pagos',envio:'envios'}[type];
     db[col] = db[col].filter(x=>x.id!==id);
-    closeConfirm(); renderAll();
+    closeConfirm(); renderAll(); saveDB();
     toast('Registro eliminado','error');
   };
   document.getElementById('confirmOverlay').classList.add('open');
@@ -1196,6 +1197,7 @@ function rSubmit(){
     pedidos: 0,
     codigo
   });
+  saveDB();
   renderAll();
 
   // Enviar correo de bienvenida al cliente
