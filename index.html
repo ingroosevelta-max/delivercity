@@ -168,46 +168,44 @@ select.form-input{cursor:pointer;}
 /* ── REGISTRO PÚBLICO ── */
 #registroScreen{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;z-index:600;overflow-y:auto;}
 #registroScreen.show{display:flex;}
-.reg-nav{padding:20px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-shrink:0;}
-.reg-nav .brand{font-family:"Playfair Display",serif;font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.reg-nav .back-btn{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:8px 16px;border-radius:8px;font-size:.82rem;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .2s;}
+.reg-nav{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-shrink:0;position:sticky;top:0;background:var(--bg);z-index:10;}
+.reg-nav .brand{font-family:"Playfair Display",serif;font-size:1.2rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.reg-nav .back-btn{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:8px 14px;border-radius:8px;font-size:.8rem;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .2s;white-space:nowrap;}
 .reg-nav .back-btn:hover{border-color:rgba(255,87,51,.4);color:var(--text);}
-.reg-main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px;}
-.reg-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;width:100%;max-width:560px;overflow:hidden;animation:fadeUp .4s ease both;}
-.reg-header{padding:32px 36px 0;}
-.reg-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,87,51,.1);border:1px solid rgba(255,87,51,.25);padding:5px 14px;border-radius:40px;font-size:.75rem;color:var(--accent2);font-weight:500;margin-bottom:16px;}
+.reg-main{flex:1;display:flex;align-items:flex-start;justify-content:center;padding:24px 16px 40px;}
+.reg-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;width:100%;max-width:560px;animation:fadeUp .4s ease both;}
+.reg-header{padding:24px 22px 0;}
+.reg-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,87,51,.1);border:1px solid rgba(255,87,51,.25);padding:5px 12px;border-radius:40px;font-size:.72rem;color:var(--accent2);font-weight:500;margin-bottom:14px;}
 .reg-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.5s infinite;}
-.reg-title{font-family:"Playfair Display",serif;font-size:1.8rem;font-weight:900;line-height:1.1;margin-bottom:8px;}
-.reg-sub{color:var(--muted);font-size:.875rem;line-height:1.6;margin-bottom:24px;}
-.reg-body{padding:0 36px 36px;}
-.reg-steps{display:flex;align-items:center;gap:0;margin-bottom:24px;}
-.rsd{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;transition:all .3s;}
+.reg-title{font-family:"Playfair Display",serif;font-size:1.6rem;font-weight:900;line-height:1.1;margin-bottom:8px;}
+.reg-sub{color:var(--muted);font-size:.85rem;line-height:1.6;margin-bottom:20px;}
+.reg-body{padding:0 22px 28px;}
+.reg-steps{display:flex;align-items:center;gap:0;margin-bottom:20px;}
+.rsd{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;flex-shrink:0;transition:all .3s;}
 .rsd.active{background:var(--accent);color:#fff;}
 .rsd.done{background:var(--success);color:#fff;}
 .rsd.idle{background:var(--surface2);color:var(--muted);border:1px solid var(--border);}
 .rsl{flex:1;height:2px;background:var(--border);transition:background .3s;}
 .rsl.done{background:var(--success);}
-.reg-hint{background:rgba(255,179,71,.07);border:1px solid rgba(255,179,71,.2);border-radius:10px;padding:12px 14px;font-size:.8rem;color:var(--accent2);line-height:1.7;margin:14px 0;}
+.reg-hint{background:rgba(255,179,71,.07);border:1px solid rgba(255,179,71,.2);border-radius:10px;padding:12px 14px;font-size:.78rem;color:var(--accent2);line-height:1.7;margin:12px 0;}
 .reg-success{text-align:center;padding:16px 0;}
-.reg-success-icon{font-size:3.5rem;margin-bottom:14px;animation:bounceIn .5s ease;}
+.reg-success-icon{font-size:3rem;margin-bottom:12px;animation:bounceIn .5s ease;}
 @keyframes bounceIn{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
-.reg-success h2{font-family:"Playfair Display",serif;font-size:1.7rem;margin-bottom:10px;}
-.reg-success p{color:var(--muted);font-size:.875rem;line-height:1.7;max-width:360px;margin:0 auto 18px;}
-.reg-code-box{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px 20px;font-size:1.1rem;font-weight:700;letter-spacing:.1em;color:var(--accent2);display:inline-block;margin-bottom:16px;}
-.sec-div{display:flex;align-items:center;gap:10px;margin:18px 0 14px;}
+.reg-success h2{font-family:"Playfair Display",serif;font-size:1.5rem;margin-bottom:10px;}
+.reg-success p{color:var(--muted);font-size:.85rem;line-height:1.7;max-width:340px;margin:0 auto 16px;}
+.reg-code-box{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:12px 18px;font-size:1rem;font-weight:700;letter-spacing:.08em;color:var(--accent2);display:inline-block;margin-bottom:14px;}
+.sec-div{display:flex;align-items:center;gap:10px;margin:16px 0 12px;}
 .sec-div::before,.sec-div::after{content:"";flex:1;height:1px;background:var(--border);}
-.sec-div span{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
-.btn-reg{width:100%;background:var(--accent);color:#fff;border:none;padding:14px;border-radius:12px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .25s;box-shadow:0 6px 20px rgba(255,87,51,.25);margin-top:6px;}
-.btn-reg:hover{background:#ff3d1a;}
+.sec-div span{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+.btn-reg{width:100%;background:var(--accent);color:#fff;border:none;padding:15px;border-radius:12px;font-size:1rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .25s;box-shadow:0 6px 20px rgba(255,87,51,.25);margin-top:8px;-webkit-tap-highlight-color:transparent;}
+.btn-reg:active{transform:scale(.98);}
 .btn-reg:disabled{opacity:.5;cursor:not-allowed;}
-.btn-reg-ghost{width:100%;background:transparent;color:var(--muted);border:1px solid var(--border);padding:12px;border-radius:12px;font-size:.88rem;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .2s;margin-top:8px;}
-.btn-reg-ghost:hover{border-color:rgba(255,255,255,.18);color:var(--text);}
-.reg-footer{text-align:center;padding:16px;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);flex-shrink:0;}
-@media(max-width:560px){
-  .reg-header{padding:22px 20px 0;}
-  .reg-body{padding:0 20px 26px;}
-  .reg-nav{padding:14px 16px;}
-}
+.btn-reg-ghost{width:100%;background:transparent;color:var(--muted);border:1px solid var(--border);padding:13px;border-radius:12px;font-size:.9rem;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .2s;margin-top:8px;-webkit-tap-highlight-color:transparent;}
+.btn-reg-ghost:active{background:rgba(255,255,255,.05);}
+.reg-footer{text-align:center;padding:14px;border-top:1px solid var(--border);font-size:.72rem;color:var(--muted);flex-shrink:0;}
+.form-input-reg{width:100%;background:var(--surface2);border:1px solid var(--border);color:var(--text);padding:14px 16px;border-radius:12px;font-family:"DM Sans",sans-serif;font-size:1rem;transition:border-color .2s;outline:none;-webkit-appearance:none;appearance:none;}
+.form-input-reg:focus{border-color:var(--accent);}
+.form-input-reg::placeholder{color:var(--muted);}
 
 /* ── RESPONSIVE ── */
 @media(max-width:920px){
@@ -217,6 +215,12 @@ select.form-input{cursor:pointer;}
   .stats-row{grid-template-columns:1fr 1fr;}
   .hamburger{display:flex!important;}
   .form-row{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  #registroScreen .form-row{grid-template-columns:1fr!important;}
+  .reg-title{font-size:1.4rem;}
+  .f-input{font-size:1rem;padding:14px 16px;}
+  .login-btn{font-size:1rem;padding:15px;}
 }
 .hamburger{display:none;position:fixed;top:14px;left:14px;z-index:150;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px;cursor:pointer;flex-direction:column;gap:4px;}
 .hamburger span{width:20px;height:2px;background:var(--text);border-radius:2px;display:block;}
@@ -239,7 +243,7 @@ select.form-input{cursor:pointer;}
     <p class="login-error" id="loginError">⚠️ Usuario o contraseña incorrectos</p>
     <div style="text-align:center;margin-top:20px;padding-top:18px;border-top:1px solid var(--border);">
       <p style="color:var(--muted);font-size:.82rem;margin-bottom:10px;">¿Eres cliente nuevo?</p>
-      <button onclick="showRegistro()" style="background:transparent;border:1px solid rgba(255,87,51,.35);color:var(--accent);padding:10px 24px;border-radius:40px;font-size:.85rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;width:100%;" onmouseover="this.style.background='rgba(255,87,51,.08)'" onmouseout="this.style.background='transparent'">
+      <button onclick="showRegistro()" style="background:rgba(255,87,51,.08);border:1px solid rgba(255,87,51,.35);color:var(--accent);padding:14px 24px;border-radius:12px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;width:100%;-webkit-tap-highlight-color:transparent;">
         📝 Registrarme como cliente
       </button>
     </div>
@@ -274,26 +278,26 @@ select.form-input{cursor:pointer;}
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Nombre completo <span style="color:var(--accent)">*</span></label>
-              <input class="form-input" id="rr-nombre" placeholder="Juan García" type="text">
+              <input class="form-input-reg" id="rr-nombre" placeholder="Juan García" type="text">
             </div>
             <div class="form-group">
               <label class="form-label">Cédula / ID <span style="color:var(--accent)">*</span></label>
-              <input class="form-input" id="rr-cedula" placeholder="8-123-4567" type="text">
+              <input class="form-input-reg" id="rr-cedula" placeholder="8-123-4567" type="text">
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">Teléfono <span style="color:var(--accent)">*</span></label>
-              <input class="form-input" id="rr-telefono" placeholder="+507 6000-0000" type="tel">
+              <input class="form-input-reg" id="rr-telefono" placeholder="+507 6000-0000" type="tel">
             </div>
             <div class="form-group">
               <label class="form-label">WhatsApp <span style="color:var(--accent)">*</span></label>
-              <input class="form-input" id="rr-whatsapp" placeholder="+507 6000-0000" type="tel">
+              <input class="form-input-reg" id="rr-whatsapp" placeholder="+507 6000-0000" type="tel">
             </div>
           </div>
           <div class="form-group">
             <label class="form-label">Correo electrónico <span style="color:var(--accent)">*</span></label>
-            <input class="form-input" id="rr-correo" placeholder="correo@ejemplo.com" type="email">
+            <input class="form-input-reg" id="rr-correo" placeholder="correo@ejemplo.com" type="email">
           </div>
           <button class="btn-reg" onclick="rGoStep2()">Continuar →</button>
         </div>
@@ -303,7 +307,7 @@ select.form-input{cursor:pointer;}
           <div class="sec-div"><span>Dirección de entrega</span></div>
           <div class="form-group">
             <label class="form-label">Provincia <span style="color:var(--accent)">*</span></label>
-            <select class="form-input" id="rr-provincia">
+            <select class="form-input-reg" id="rr-provincia">
               <option value="">— Selecciona tu provincia —</option>
               <option>Chiriquí</option><option>Veraguas</option><option>Coclé</option>
               <option>Herrera</option><option>Los Santos</option><option>Colón</option>
@@ -312,11 +316,11 @@ select.form-input{cursor:pointer;}
           </div>
           <div class="form-group">
             <label class="form-label">Dirección exacta <span style="color:var(--accent)">*</span></label>
-            <input class="form-input" id="rr-direccion" placeholder="Barrio, calle, corregimiento, referencias...">
+            <input class="form-input-reg" id="rr-direccion" placeholder="Barrio, calle, corregimiento, referencias...">
           </div>
           <div class="form-group">
             <label class="form-label">Punto de referencia adicional</label>
-            <input class="form-input" id="rr-referencia" placeholder="Ej: frente al parque, al lado del banco...">
+            <input class="form-input-reg" id="rr-referencia" placeholder="Ej: frente al parque, al lado del banco...">
           </div>
           <div class="reg-hint">
             📦 Servicio desde <strong>$20.00</strong> por compra en un mismo local (hasta 10 productos). Productos adicionales: <strong>$2.00 c/u</strong>.
@@ -1297,3 +1301,4 @@ function rReset(){
 </script>
 </body>
 </html>
+
