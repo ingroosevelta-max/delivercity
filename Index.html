@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DeliverCity — Panel Administrador</title>
+<title>ShipBuy- By Roosevelt — Panel Administrador</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
@@ -98,6 +98,32 @@ tr:hover td{background:rgba(255,255,255,.018);}
 .btn-danger:hover{background:rgba(239,68,68,.2);}
 .action-btns{display:flex;gap:5px;}
 
+/* ── PRODUCT LIST ── */
+.prod-list{margin:12px 0;}
+.prod-row{display:grid;grid-template-columns:1fr 72px 100px auto;gap:8px;align-items:center;margin-bottom:8px;}
+.prod-row input{background:var(--bg);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:9px;font-family:"DM Sans",sans-serif;font-size:.85rem;outline:none;width:100%;transition:border-color .2s;}
+.prod-row input:focus{border-color:var(--accent);}
+.prod-row input::placeholder{color:var(--muted);}
+.prod-qty{width:72px!important;}
+.prod-price{width:100px!important;}
+.prod-del{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#ef4444;border-radius:8px;padding:9px 11px;cursor:pointer;font-size:.9rem;transition:all .2s;white-space:nowrap;}
+.prod-del:hover{background:rgba(239,68,68,.25);}
+.prod-header{display:grid;grid-template-columns:1fr 72px 100px auto;gap:8px;margin-bottom:4px;}
+.prod-header span{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:0 2px;}
+.factura-zone{border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;margin-top:4px;position:relative;}
+.factura-zone:hover{border-color:rgba(255,87,51,.4);background:rgba(255,87,51,.04);}
+.factura-zone.has-file{border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.04);}
+.factura-preview{max-width:100%;max-height:180px;border-radius:8px;margin-top:10px;display:none;}
+.factura-input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.add-prod-btn{background:rgba(255,87,51,.08);border:1px dashed rgba(255,87,51,.35);color:var(--accent);border-radius:9px;padding:10px;width:100%;cursor:pointer;font-size:.85rem;font-weight:600;font-family:"DM Sans",sans-serif;transition:all .2s;margin-top:4px;}
+.add-prod-btn:hover{background:rgba(255,87,51,.15);}
+.servicio-box{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-top:14px;}
+.servicio-row{display:flex;justify-content:space-between;align-items:center;font-size:.85rem;padding:4px 0;}
+.servicio-row.total{font-weight:700;font-size:.95rem;border-top:1px solid var(--border);margin-top:8px;padding-top:10px;color:var(--accent2);}
+.servicio-label{color:var(--muted);}
+.prod-counter{font-size:.78rem;color:var(--muted);margin-bottom:8px;}
+.prod-counter span{color:var(--accent2);font-weight:600;}
+
 /* ── SEARCH ── */
 .search-bar{margin-bottom:16px;}
 .search-input{width:100%;max-width:420px;background:var(--surface);border:1px solid var(--border);color:var(--text);padding:10px 16px;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s;}
@@ -159,7 +185,7 @@ select.form-input{cursor:pointer;}
   <div class="login-bg"></div>
   <div class="login-grid"></div>
   <div class="login-box">
-    <div class="login-logo">DeliverCity</div>
+    <div class="login-logo">ShipBuy- By Roosevelt</div>
     <p class="login-subtitle">Panel de Administración — Acceso restringido</p>
     <label class="f-label">Usuario</label>
     <input class="f-input" id="loginUser" type="text" placeholder="Ingresa tu usuario" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()">
@@ -180,7 +206,7 @@ select.form-input{cursor:pointer;}
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
-      <div class="brand">DeliverCity</div>
+      <div class="brand">ShipBuy- By Roosevelt</div>
       <div class="sub">Admin Panel</div>
     </div>
     <div class="nav-section">Principal</div>
@@ -191,9 +217,9 @@ select.form-input{cursor:pointer;}
     <div class="nav-item" onclick="showSection('clientes',this)"><span class="nav-icon">👥</span>Clientes</div>
     <div class="nav-item" onclick="showSection('pagos',this)"><span class="nav-icon">💳</span>Pagos</div>
     <div class="nav-item" onclick="showSection('envios',this)"><span class="nav-icon">🚚</span>Envíos</div>
-    <div style="padding:0 8px 4px;">
-      <button onclick="testEmail()" class="btn btn-ghost" style="width:100%;font-size:.8rem;padding:9px;border-radius:10px;display:flex;align-items:center;justify-content:center;gap:7px;">
-        <span>📧</span> Probar envío de correo
+    <div style="padding:0 8px 8px;">
+      <button onclick="testEmail()" style="width:100%;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.3);color:#3b82f6;border-radius:10px;padding:10px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;" onmouseover="this.style.background='rgba(59,130,246,.22)'" onmouseout="this.style.background='rgba(59,130,246,.12)'">
+        📧 Probar envío de correo
       </button>
     </div>
     <div class="sidebar-bottom">
@@ -234,7 +260,7 @@ select.form-input{cursor:pointer;}
       </div>
       <div class="search-bar"><input class="search-input" placeholder="🔍  Buscar por código, cliente o estado..." oninput="filterTable('tbl-pedidos',this.value)"></div>
       <div class="card"><div class="tbl-wrap"><table>
-        <thead><tr><th>Código</th><th>Cliente</th><th>Establecimiento</th><th>Descripción</th><th>Total</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <thead><tr><th>Código</th><th>Cliente</th><th>Establecimiento</th><th>Productos</th><th>Cant.</th><th>Desglose</th><th>Factura</th><th>Estado</th><th>Acciones</th></tr></thead>
         <tbody id="tbl-pedidos"></tbody>
       </table></div></div>
     </div>
@@ -319,24 +345,30 @@ select.form-input{cursor:pointer;}
 <div class="toast" id="toast"></div>
 
 <script>
-// ═══════════════════ EMAILJS (via fetch API) ═══════════════════
+// ═══════════════════ EMAILJS ═══════════════════
 const EJS_SERVICE  = 'service_zja8zvo';
 const EJS_TEMPLATE = 'template_b2i67cg';
 const EJS_PUBKEY   = '-tU62B5FUmaYAuQSJ';
 
 function ejsSend(params){
-  return fetch('https://api.emailjs.com/api/v1.0/email/send', {
-    method : 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body   : JSON.stringify({
-      service_id  : EJS_SERVICE,
-      template_id : EJS_TEMPLATE,
-      user_id     : EJS_PUBKEY,
+  // Use XMLHttpRequest to avoid CORS preflight issues
+  return new Promise(function(resolve, reject){
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://api.emailjs.com/api/v1.0/email/send', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function(){
+      if(xhr.status === 200){ resolve(xhr.responseText); }
+      else { reject(new Error('EmailJS error ' + xhr.status + ': ' + xhr.responseText)); }
+    };
+    xhr.onerror = function(){
+      reject(new Error('No se pudo conectar con EmailJS. Verifica tu conexión a internet.'));
+    };
+    xhr.send(JSON.stringify({
+      service_id     : EJS_SERVICE,
+      template_id    : EJS_TEMPLATE,
+      user_id        : EJS_PUBKEY,
       template_params: params
-    })
-  }).then(function(res){
-    if(!res.ok) return res.text().then(function(t){ throw new Error(t); });
-    return res.text();
+    }));
   });
 }
 
@@ -352,7 +384,7 @@ function sendPaymentEmail(pago){
     to_name  : pago.cliente,
     to_email : correo,
     reply_to : 'soluciones.tecnologica.pa@gmail.com',
-    from_name: 'DeliverCity',
+    from_name: 'ShipBuy- By Roosevelt',
     codigo   : pago.codigo,
     monto    : '$' + parseFloat(pago.monto).toFixed(2),
     metodo   : pago.metodo,
@@ -373,12 +405,12 @@ function testEmail(){
     to_name  : 'Administrador',
     to_email : 'soluciones.tecnologica.pa@gmail.com',
     reply_to : 'soluciones.tecnologica.pa@gmail.com',
-    from_name: 'DeliverCity',
-    codigo   : 'DC-PRUEBA',
+    from_name: 'ShipBuy- By Roosevelt',
+    codigo   : 'SB-PRUEBA',
     monto    : '$0.00',
     metodo   : 'Prueba',
     fecha    : new Date().toLocaleDateString('es-PA'),
-    message  : 'Correo de prueba desde DeliverCity Admin Panel. Si recibes esto, todo funciona correctamente.'
+    message  : 'Correo de prueba desde ShipBuy- By Roosevelt Admin Panel. Si recibes esto, todo funciona correctamente.'
   })
   .then(function(){
     toast('✅ Prueba exitosa — revisa tu correo', 'success');
@@ -451,18 +483,18 @@ let db = {
     {id:3,nombre:'Luisa Herrera',telefono:'+507 6300-9012',correo:'luisa@correo.com',provincia:'Coclé',direccion:'Penonomé, Las Mercedes',pedidos:2},
   ],
   pedidos:[
-    {id:1,codigo:'DC-482931',cliente:'María González',tienda:'Farmacia Central',descripcion:'Ibuprofeno 400mg x2, Vitamina C',total:18.50,estado:'En tránsito'},
-    {id:2,codigo:'DC-371820',cliente:'Carlos Ruiz',tienda:'TechZone',descripcion:'Cable USB-C 2m, funda celular',total:24.00,estado:'Entregado'},
-    {id:3,codigo:'DC-295048',cliente:'Luisa Herrera',tienda:'Boutique Moda',descripcion:'Vestido talla M color azul, cartera',total:55.00,estado:'Pendiente'},
+    {id:1,codigo:'SB-482931',cliente:'María González',tienda:'Farmacia Central',descripcion:'Ibuprofeno 400mg x2, Vitamina C',total:18.50,estado:'En tránsito'},
+    {id:2,codigo:'SB-371820',cliente:'Carlos Ruiz',tienda:'TechZone',descripcion:'Cable USB-C 2m, funda celular',total:24.00,estado:'Entregado'},
+    {id:3,codigo:'SB-295048',cliente:'Luisa Herrera',tienda:'Boutique Moda',descripcion:'Vestido talla M color azul, cartera',total:55.00,estado:'Pendiente'},
   ],
   pagos:[
-    {id:1,codigo:'DC-482931',cliente:'María González',monto:27.00,metodo:'Yappy',fecha:'2025-02-20',estado:'Confirmado'},
-    {id:2,codigo:'DC-371820',cliente:'Carlos Ruiz',monto:32.50,metodo:'Transferencia',fecha:'2025-02-18',estado:'Confirmado'},
-    {id:3,codigo:'DC-295048',cliente:'Luisa Herrera',monto:63.50,metodo:'Tarjeta',fecha:'2025-02-25',estado:'Pendiente'},
+    {id:1,codigo:'SB-482931',cliente:'María González',monto:27.00,metodo:'Yappy',fecha:'2025-02-20',estado:'Confirmado'},
+    {id:2,codigo:'SB-371820',cliente:'Carlos Ruiz',monto:32.50,metodo:'Transferencia',fecha:'2025-02-18',estado:'Confirmado'},
+    {id:3,codigo:'SB-295048',cliente:'Luisa Herrera',monto:63.50,metodo:'Tarjeta',fecha:'2025-02-25',estado:'Pendiente'},
   ],
   envios:[
-    {id:1,codigo:'ENV-001',pedido:'DC-482931',destino:'Chiriquí',direccion:'David, Calle 5 Norte',transportista:'Servi Entrega',estado:'En camino'},
-    {id:2,codigo:'ENV-002',pedido:'DC-371820',destino:'Veraguas',direccion:'Santiago, Barrio San José',transportista:'Transporte Ferguson',estado:'Entregado'},
+    {id:1,codigo:'ENV-001',pedido:'SB-482931',destino:'Chiriquí',direccion:'David, Calle 5 Norte',transportista:'Servi Entrega',estado:'En camino'},
+    {id:2,codigo:'ENV-002',pedido:'SB-371820',destino:'Veraguas',direccion:'Santiago, Barrio San José',transportista:'Transporte Ferguson',estado:'Entregado'},
   ],
   nextId:{tiendas:7,clientes:4,pedidos:4,pagos:4,envios:3}
 };
@@ -544,19 +576,30 @@ function renderClientes(){
 }
 
 function renderPedidos(){
-  document.getElementById('tbl-pedidos').innerHTML = db.pedidos.map(p=>`
-    <tr>
+  document.getElementById('tbl-pedidos').innerHTML = db.pedidos.map(p=>{
+    const numProds = p.productos ? p.productos.reduce((a,b)=>a+(parseInt(b.cantidad)||1),0) : '—';
+    const subtotal = p.productos ? p.productos.reduce((a,b)=>a+(parseFloat(b.precio)||0)*(parseInt(b.cantidad)||1),0) : 0;
+    const itbms = subtotal*0.07;
+    const lista = p.productos ? p.productos.map(x=>`<span style="display:block;font-size:.75rem;color:var(--muted)">${x.cantidad}× ${x.nombre} <span style="color:var(--accent2)">$${(parseFloat(x.precio)||0).toFixed(2)}</span></span>`).join('') : (p.descripcion||'');
+    const facturaBtn = p.factura ? `<button class="btn btn-sm btn-success" onclick="viewFactura(${p.id})" style="background:rgba(34,197,94,.1);color:#22c55e;border:1px solid rgba(34,197,94,.2)">🧾 Ver</button>` : `<span style="font-size:.75rem;color:var(--muted)">Sin factura</span>`;
+    return `<tr>
       <td><strong>${p.codigo}</strong></td>
       <td>${p.cliente}</td>
-      <td>${p.tienda}</td>
-      <td style="max-width:180px;font-size:.8rem;color:var(--muted)">${p.descripcion}</td>
-      <td><strong>$${parseFloat(p.total).toFixed(2)}</strong></td>
+      <td><div style="font-weight:600">${p.tienda}</div><div style="font-size:.75rem;color:var(--muted)">${p.localdir||''}</div></td>
+      <td style="max-width:200px">${lista}</td>
+      <td><span class="badge badge-info">${numProds}</span></td>
+      <td style="font-size:.78rem;color:var(--muted)">
+        <div>Sub: $${subtotal.toFixed(2)}</div>
+        <div>ITBMS: $${itbms.toFixed(2)}</div>
+        <div style="color:var(--accent2);font-weight:700">Total: $${parseFloat(p.total).toFixed(2)}</div>
+      </td>
+      <td>${facturaBtn}</td>
       <td>${badge(p.estado)}</td>
       <td><div class="action-btns">
         <button class="btn btn-sm btn-ghost" onclick="editRecord('pedido',${p.id})">✏️ Editar</button>
         <button class="btn btn-sm btn-danger" onclick="askDelete('pedido',${p.id})">🗑️</button>
       </div></td>
-    </tr>`).join('');
+    </tr>`;}).join('');
 }
 
 function renderPagos(){
@@ -569,6 +612,7 @@ function renderPagos(){
       <td style="color:var(--muted);font-size:.82rem">${p.fecha}</td>
       <td>${badge(p.estado)}</td>
       <td><div class="action-btns">
+        <button class="btn btn-sm" style="background:rgba(59,130,246,.1);color:#3b82f6;border:1px solid rgba(59,130,246,.25);border-radius:7px;padding:6px 11px;font-size:.76rem;font-weight:600;cursor:pointer;" onclick="sendPaymentEmail(db.pagos.find(x=>x.id===${p.id}))">📧 Correo</button>
         <button class="btn btn-sm btn-ghost" onclick="editRecord('pago',${p.id})">✏️ Editar</button>
         <button class="btn btn-sm btn-danger" onclick="askDelete('pago',${p.id})">🗑️</button>
       </div></td>
@@ -600,7 +644,7 @@ function clienteSel(cur){ return `<option value="">— Seleccionar —</option>`
 function pedidoSel(cur){ return `<option value="">— Seleccionar —</option>`+db.pedidos.map(p=>`<option ${cur===p.codigo?'selected':''}>${p.codigo}</option>`).join(''); }
 function tiendaSel(cur){ return `<option value="">— Seleccionar —</option>`+db.tiendas.map(t=>`<option ${cur===t.nombre?'selected':''}>${t.nombre}</option>`).join(''); }
 
-function genCode(){ return 'DC-'+Math.floor(100000+Math.random()*900000); }
+function genCode(){ return 'SB-'+Math.floor(100000+Math.random()*900000); }
 
 const formHtml = {
   tienda:(d)=>`
@@ -627,17 +671,55 @@ const formHtml = {
       <div class="form-group"><label class="form-label">Pedidos realizados</label><input class="form-input" id="fped" type="number" min="0" value="${d.pedidos||0}"></div>
     </div>
     <div class="form-group"><label class="form-label">Dirección exacta</label><input class="form-input" id="fdir" placeholder="Barrio, calle, referencias..." value="${d.direccion||''}"></div>`,
-  pedido:(d)=>`
+  pedido:(d)=>{
+    const prods = d.productos && d.productos.length ? d.productos : [{nombre:'',cantidad:1,precio:0}];
+    const prodsHtml = prods.map((_,i)=>prodRowHtml(i)).join('');
+    const facturaHtml = d.factura ? `<img class="factura-preview" id="factura-preview" src="${d.factura}" style="display:block">` : `<img class="factura-preview" id="factura-preview">`;
+    return `
     <div class="form-row">
-      <div class="form-group"><label class="form-label">Código</label><input class="form-input" id="fcod" placeholder="DC-000000" value="${d.codigo||genCode()}"></div>
+      <div class="form-group"><label class="form-label">Código</label><input class="form-input" id="fcod" placeholder="SB-000000" value="${d.codigo||genCode()}"></div>
       <div class="form-group"><label class="form-label">Cliente</label><select class="form-input" id="fcli">${clienteSel(d.cliente)}</select></div>
     </div>
-    <div class="form-group"><label class="form-label">Establecimiento</label><select class="form-input" id="ftda">${tiendaSel(d.tienda)}</select></div>
-    <div class="form-group"><label class="form-label">Descripción del pedido</label><input class="form-input" id="fdesc" placeholder="Ej: Ibuprofeno 400mg x2, cable USB-C..." value="${d.descripcion||''}"></div>
-    <div class="form-row">
-      <div class="form-group"><label class="form-label">Total ($)</label><input class="form-input" id="ftot" type="number" step="0.01" min="0" placeholder="0.00" value="${d.total||''}"></div>
+    <div class="form-group"><label class="form-label">Establecimiento / Local</label><select class="form-input" id="ftda">${tiendaSel(d.tienda)}</select></div>
+    <div class="form-group"><label class="form-label">Dirección del local en la ciudad</label><input class="form-input" id="flocdir" placeholder="Ej: Vía España, local 12, frente al banco..." value="${d.localdir||''}"></div>
+
+    <div class="form-group" style="margin-top:4px;">
+      <label class="form-label">Productos a comprar</label>
+      <div class="prod-counter">Cantidad total: <span id="prod-count">0</span> unidades — Tarifa base hasta 10 productos</div>
+      <div class="prod-header">
+        <span>Nombre del producto</span><span style="text-align:center">Cant.</span><span style="text-align:center">Precio unit.</span><span></span>
+      </div>
+      <div class="prod-list" id="prod-list">${prodsHtml}</div>
+      <button type="button" class="add-prod-btn" onclick="addProdRow()">+ Agregar otro producto</button>
+    </div>
+
+    <div class="servicio-box" id="servicio-box">
+      <div class="servicio-row"><span class="servicio-label">Subtotal productos</span><span id="subtotal-prods">$0.00</span></div>
+      <div class="servicio-row"><span class="servicio-label">ITBMS 7%</span><span id="itbms-val">$0.00</span></div>
+      <div class="servicio-row" style="border-top:1px solid var(--border);padding-top:8px;margin-top:4px;"><span class="servicio-label">Servicio ShipBuy (base 10 prod.)</span><span>$20.00</span></div>
+      <div class="servicio-row" id="extra-row" style="display:none"><span class="servicio-label">Productos extra (<span id="extra-count">0</span> × $2.00)</span><span id="extra-val">$0.00</span></div>
+      <div class="servicio-row total"><span>TOTAL A PAGAR</span><span id="servicio-total">$20.00</span></div>
+    </div>
+
+    <div class="form-group" style="margin-top:16px;">
+      <label class="form-label">📎 Adjuntar factura de compra (imagen o PDF como imagen)</label>
+      <div class="factura-zone" id="factura-zone" onclick="document.getElementById('factura-input').click()">
+        <input type="file" id="factura-input" accept="image/*" style="display:none" onchange="handleFactura(this)">
+        <div id="factura-placeholder">
+          <div style="font-size:2rem;margin-bottom:8px">🧾</div>
+          <div style="font-size:.85rem;color:var(--muted)">Haz clic para subir la factura</div>
+          <div style="font-size:.75rem;color:var(--muted);margin-top:4px">JPG, PNG — máx. 5MB</div>
+        </div>
+        ${facturaHtml}
+      </div>
+      ${d.factura ? '<p style="font-size:.75rem;color:var(--success);margin-top:6px">✅ Factura adjunta</p>' : ''}
+    </div>
+
+    <div class="form-row" style="margin-top:14px;">
+      <div class="form-group"><label class="form-label">Notas adicionales</label><input class="form-input" id="fdesc" placeholder="Color, talla, marca, instrucciones..." value="${d.descripcion||''}"></div>
       <div class="form-group"><label class="form-label">Estado</label><select class="form-input" id="fest">${sel(['Pendiente','En proceso','En tránsito','Entregado','Cancelado'],d.estado)}</select></div>
-    </div>`,
+    </div>`;
+  },
   pago:(d)=>`
     <div class="form-row">
       <div class="form-group"><label class="form-label">Código de pedido</label><select class="form-input" id="fcod">${pedidoSel(d.codigo)}</select></div>
@@ -668,6 +750,7 @@ const typeNames = {tienda:'Establecimiento',cliente:'Cliente',pedido:'Pedido',pa
 
 function openModal(type, data={}){
   editType=type; editId=data.id||null;
+  if(type==='pedido') prodRowCount = (data.productos ? data.productos.length - 1 : 0);
   document.getElementById('modalTitle').textContent = (editId?'Editar ':'Nuevo ')+typeNames[type];
   document.getElementById('modalBody').innerHTML = formHtml[type](data)+
     `<div class="form-actions">
@@ -675,6 +758,34 @@ function openModal(type, data={}){
        <button class="btn btn-primary" onclick="saveRecord()">💾 Guardar</button>
      </div>`;
   document.getElementById('modalOverlay').classList.add('open');
+  // Populate product rows when editing
+  if(type==='pedido' && data.productos && data.productos.length){
+    const list = document.getElementById('prod-list');
+    if(list){
+      list.innerHTML = '';
+      data.productos.forEach((p,i)=>{
+        const div = document.createElement('div');
+        div.innerHTML = prodRowHtml(i);
+        list.appendChild(div.firstElementChild);
+        const nom = document.getElementById('pnom-'+i);
+        const qty = document.getElementById('pqty-'+i);
+        if(nom) nom.value = p.nombre;
+        if(qty) qty.value = p.cantidad;
+      });
+      prodRowCount = data.productos.length - 1;
+    }
+  }
+  if(type==='pedido'){
+    // populate prices when editing
+    if(data.productos && data.productos.length){
+      data.productos.forEach((p,i)=>{
+        const prc = document.getElementById('pprc-'+i);
+        if(prc) prc.value = p.precio||0;
+      });
+    }
+    window._facturaData = null;
+  }
+  if(type==='pedido') updateServicio();
 }
 function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); editId=null; editType=null; }
 
@@ -691,7 +802,12 @@ function saveRecord(){
   let obj={};
   if(editType==='tienda')   obj={emoji:g('fe'),nombre:g('fn'),categoria:g('fcat'),tiempo:g('ft'),rating:g('fr'),estado:g('fest')};
   if(editType==='cliente')  obj={nombre:g('fn'),telefono:g('ftel'),correo:g('fmail'),provincia:g('fprov'),direccion:g('fdir'),pedidos:parseInt(g('fped'))||0};
-  if(editType==='pedido')   obj={codigo:g('fcod'),cliente:g('fcli'),tienda:g('ftda'),descripcion:g('fdesc'),total:parseFloat(g('ftot'))||0,estado:g('fest')};
+  if(editType==='pedido'){
+    const prods = getProdRows();
+    const factura = window._facturaData || (editId ? (db.pedidos.find(x=>x.id===editId)||{}).factura : null) || null;
+    obj={codigo:g('fcod'),cliente:g('fcli'),tienda:g('ftda'),localdir:g('flocdir'),productos:prods,descripcion:g('fdesc'),factura:factura,total:calcTotalPedido(prods),estado:g('fest')};
+    window._facturaData = null;
+  }
   if(editType==='pago')     obj={codigo:g('fcod'),cliente:g('fcli'),monto:parseFloat(g('fmonto'))||0,metodo:g('fmet'),fecha:g('ffecha'),estado:g('fest')};
   if(editType==='envio')    obj={codigo:g('fcod'),pedido:g('fped'),destino:g('fdest'),direccion:g('fdir'),transportista:g('ftrans'),estado:g('fest')};
 
@@ -714,6 +830,122 @@ function saveRecord(){
     toast('Registro agregado ✓','success');
   }
   closeModal(); renderAll();
+}
+
+// ═══════════════════ PRODUCTO ROWS ═══════════════════
+let prodRowCount = 0;
+
+function prodRowHtml(i){
+  return `<div class="prod-row" id="prow-${i}">
+    <input type="text" placeholder="Ej: Camisa azul talla M" id="pnom-${i}" oninput="updateServicio()">
+    <input type="number" class="prod-qty" placeholder="1" min="1" value="1" id="pqty-${i}" oninput="updateServicio()">
+    <input type="number" class="prod-price" placeholder="0.00" min="0" step="0.01" value="0" id="pprc-${i}" oninput="updateServicio()">
+    <button type="button" class="prod-del" onclick="removeProdRow(${i})">🗑️</button>
+  </div>`;
+}
+
+function addProdRow(){
+  prodRowCount++;
+  const list = document.getElementById('prod-list');
+  if(!list) return;
+  const div = document.createElement('div');
+  div.innerHTML = prodRowHtml(prodRowCount);
+  list.appendChild(div.firstElementChild);
+  updateServicio();
+}
+
+function removeProdRow(i){
+  const row = document.getElementById('prow-'+i);
+  if(row){
+    // Keep at least 1 row
+    const list = document.getElementById('prod-list');
+    if(list && list.querySelectorAll('.prod-row').length <= 1){ 
+      toast('Debe haber al menos un producto','error'); return; 
+    }
+    row.remove();
+  }
+  updateServicio();
+}
+
+function getProdRows(){
+  const rows = document.querySelectorAll('#prod-list .prod-row');
+  const prods = [];
+  rows.forEach(row=>{
+    const id = row.id.replace('prow-','');
+    const nom = (document.getElementById('pnom-'+id)||{}).value||'';
+    const qty = parseInt((document.getElementById('pqty-'+id)||{}).value)||1;
+    const prc = parseFloat((document.getElementById('pprc-'+id)||{}).value)||0;
+    if(nom.trim()) prods.push({nombre:nom.trim(), cantidad:qty, precio:prc});
+  });
+  return prods;
+}
+
+function calcServicio(prods){
+  const total = prods.reduce((a,b)=>a+(parseInt(b.cantidad)||1),0);
+  return 20.00 + (total > 10 ? (total-10)*2 : 0);
+}
+function calcTotalPedido(prods){
+  const subtotal = prods.reduce((a,b)=>a+(parseFloat(b.precio)||0)*(parseInt(b.cantidad)||1),0);
+  const itbms = subtotal * 0.07;
+  const servicio = calcServicio(prods);
+  return subtotal + itbms + servicio;
+}
+
+function updateServicio(){
+  const prods = getProdRows();
+  const totalUnits = prods.reduce((a,b)=>a+(parseInt(b.cantidad)||1),0);
+  const subtotal = prods.reduce((a,b)=>a+(parseFloat(b.precio)||0)*(parseInt(b.cantidad)||1),0);
+  const itbms = subtotal * 0.07;
+  const extra = totalUnits > 10 ? totalUnits - 10 : 0;
+  const servicio = 20 + extra * 2;
+  const grandTotal = subtotal + itbms + servicio;
+
+  const set = (id,val) => { const el=document.getElementById(id); if(el) el.textContent=val; };
+  const setDisp = (id,disp) => { const el=document.getElementById(id); if(el) el.style.display=disp; };
+
+  set('prod-count', totalUnits);
+  set('subtotal-prods', '$'+subtotal.toFixed(2));
+  set('itbms-val', '$'+itbms.toFixed(2));
+  set('extra-count', extra);
+  set('extra-val', '$'+(extra*2).toFixed(2));
+  set('servicio-total', '$'+grandTotal.toFixed(2));
+  setDisp('extra-row', extra > 0 ? 'flex' : 'none');
+
+  const counter = document.getElementById('prod-count');
+  if(counter) counter.style.color = totalUnits > 10 ? 'var(--danger)' : 'var(--accent2)';
+}
+
+// ═══════════════════ FACTURA ═══════════════════
+function handleFactura(input){
+  const file = input.files[0];
+  if(!file) return;
+  if(file.size > 5*1024*1024){ toast('Archivo muy grande (máx 5MB)','error'); return; }
+  const reader = new FileReader();
+  reader.onload = function(e){
+    window._facturaData = e.target.result;
+    const preview = document.getElementById('factura-preview');
+    const placeholder = document.getElementById('factura-placeholder');
+    const zone = document.getElementById('factura-zone');
+    if(preview){ preview.src = e.target.result; preview.style.display='block'; }
+    if(placeholder) placeholder.style.display='none';
+    if(zone) zone.classList.add('has-file');
+    toast('Factura cargada ✓','success');
+  };
+  reader.readAsDataURL(file);
+}
+
+function viewFactura(pedidoId){
+  const p = db.pedidos.find(x=>x.id===pedidoId);
+  if(!p || !p.factura){ toast('Este pedido no tiene factura adjunta','error'); return; }
+  document.getElementById('modalTitle').textContent = '🧾 Factura — '+p.codigo;
+  document.getElementById('modalBody').innerHTML =
+    '<div style="text-align:center;padding:8px 0">' +
+    '<img src="'+p.factura+'" style="max-width:100%;border-radius:10px;border:1px solid var(--border)">' +
+    '<div style="margin-top:16px;display:flex;gap:10px;justify-content:center;">' +
+    '<button class="btn btn-ghost" onclick="closeModal()">Cerrar</button>' +
+    '<a href="'+p.factura+'" download="factura-'+p.codigo+'.jpg" class="btn btn-primary" style="text-decoration:none">⬇️ Descargar</a>' +
+    '</div></div>';
+  document.getElementById('modalOverlay').classList.add('open');
 }
 
 // ═══════════════════ DELETE ═══════════════════
