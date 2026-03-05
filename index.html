@@ -166,7 +166,7 @@ select.form-input{cursor:pointer;}
 .toast.error{border-color:rgba(239,68,68,.35);color:#ef4444;}
 
 /* ── REGISTRO PÚBLICO ── */
-#registroScreen{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;z-index:490;overflow-y:auto;}
+#registroScreen{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;z-index:600;overflow-y:auto;}
 #registroScreen.show{display:flex;}
 .reg-nav{padding:20px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-shrink:0;}
 .reg-nav .brand{font-family:"Playfair Display",serif;font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
@@ -1136,11 +1136,13 @@ function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('o
 
 // ═══════════════════ REGISTRO PÚBLICO ═══════════════════
 function showRegistro(){
+  document.getElementById('loginScreen').style.display='none';
   document.getElementById('registroScreen').classList.add('show');
   rReset();
 }
 function hideRegistro(){
   document.getElementById('registroScreen').classList.remove('show');
+  document.getElementById('loginScreen').style.display='flex';
 }
 
 function rGoStep2(){
@@ -1258,3 +1260,4 @@ function rReset(){
 </script>
 </body>
 </html>
+
