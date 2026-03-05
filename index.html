@@ -165,6 +165,50 @@ select.form-input{cursor:pointer;}
 .toast.success{border-color:rgba(34,197,94,.35);color:#22c55e;}
 .toast.error{border-color:rgba(239,68,68,.35);color:#ef4444;}
 
+/* ── REGISTRO PÚBLICO ── */
+#registroScreen{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;z-index:490;overflow-y:auto;}
+#registroScreen.show{display:flex;}
+.reg-nav{padding:20px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-shrink:0;}
+.reg-nav .brand{font-family:"Playfair Display",serif;font-size:1.3rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.reg-nav .back-btn{background:var(--surface);border:1px solid var(--border);color:var(--muted);padding:8px 16px;border-radius:8px;font-size:.82rem;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .2s;}
+.reg-nav .back-btn:hover{border-color:rgba(255,87,51,.4);color:var(--text);}
+.reg-main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px;}
+.reg-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;width:100%;max-width:560px;overflow:hidden;animation:fadeUp .4s ease both;}
+.reg-header{padding:32px 36px 0;}
+.reg-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,87,51,.1);border:1px solid rgba(255,87,51,.25);padding:5px 14px;border-radius:40px;font-size:.75rem;color:var(--accent2);font-weight:500;margin-bottom:16px;}
+.reg-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.5s infinite;}
+.reg-title{font-family:"Playfair Display",serif;font-size:1.8rem;font-weight:900;line-height:1.1;margin-bottom:8px;}
+.reg-sub{color:var(--muted);font-size:.875rem;line-height:1.6;margin-bottom:24px;}
+.reg-body{padding:0 36px 36px;}
+.reg-steps{display:flex;align-items:center;gap:0;margin-bottom:24px;}
+.rsd{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0;transition:all .3s;}
+.rsd.active{background:var(--accent);color:#fff;}
+.rsd.done{background:var(--success);color:#fff;}
+.rsd.idle{background:var(--surface2);color:var(--muted);border:1px solid var(--border);}
+.rsl{flex:1;height:2px;background:var(--border);transition:background .3s;}
+.rsl.done{background:var(--success);}
+.reg-hint{background:rgba(255,179,71,.07);border:1px solid rgba(255,179,71,.2);border-radius:10px;padding:12px 14px;font-size:.8rem;color:var(--accent2);line-height:1.7;margin:14px 0;}
+.reg-success{text-align:center;padding:16px 0;}
+.reg-success-icon{font-size:3.5rem;margin-bottom:14px;animation:bounceIn .5s ease;}
+@keyframes bounceIn{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+.reg-success h2{font-family:"Playfair Display",serif;font-size:1.7rem;margin-bottom:10px;}
+.reg-success p{color:var(--muted);font-size:.875rem;line-height:1.7;max-width:360px;margin:0 auto 18px;}
+.reg-code-box{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px 20px;font-size:1.1rem;font-weight:700;letter-spacing:.1em;color:var(--accent2);display:inline-block;margin-bottom:16px;}
+.sec-div{display:flex;align-items:center;gap:10px;margin:18px 0 14px;}
+.sec-div::before,.sec-div::after{content:"";flex:1;height:1px;background:var(--border);}
+.sec-div span{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+.btn-reg{width:100%;background:var(--accent);color:#fff;border:none;padding:14px;border-radius:12px;font-size:.95rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .25s;box-shadow:0 6px 20px rgba(255,87,51,.25);margin-top:6px;}
+.btn-reg:hover{background:#ff3d1a;}
+.btn-reg:disabled{opacity:.5;cursor:not-allowed;}
+.btn-reg-ghost{width:100%;background:transparent;color:var(--muted);border:1px solid var(--border);padding:12px;border-radius:12px;font-size:.88rem;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .2s;margin-top:8px;}
+.btn-reg-ghost:hover{border-color:rgba(255,255,255,.18);color:var(--text);}
+.reg-footer{text-align:center;padding:16px;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);flex-shrink:0;}
+@media(max-width:560px){
+  .reg-header{padding:22px 20px 0;}
+  .reg-body{padding:0 20px 26px;}
+  .reg-nav{padding:14px 16px;}
+}
+
 /* ── RESPONSIVE ── */
 @media(max-width:920px){
   .sidebar{transform:translateX(-100%);}
@@ -193,7 +237,110 @@ select.form-input{cursor:pointer;}
     <input class="f-input" id="loginPass" type="password" placeholder="••••••••••••" onkeydown="if(event.key==='Enter')doLogin()">
     <button class="login-btn" onclick="doLogin()">Ingresar →</button>
     <p class="login-error" id="loginError">⚠️ Usuario o contraseña incorrectos</p>
+    <div style="text-align:center;margin-top:20px;padding-top:18px;border-top:1px solid var(--border);">
+      <p style="color:var(--muted);font-size:.82rem;margin-bottom:10px;">¿Eres cliente nuevo?</p>
+      <button onclick="showRegistro()" style="background:transparent;border:1px solid rgba(255,87,51,.35);color:var(--accent);padding:10px 24px;border-radius:40px;font-size:.85rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;width:100%;" onmouseover="this.style.background='rgba(255,87,51,.08)'" onmouseout="this.style.background='transparent'">
+        📝 Registrarme como cliente
+      </button>
+    </div>
   </div>
+</div>
+
+<!-- ══════════════════════════════ REGISTRO PÚBLICO ══════════════════════════════ -->
+<div id="registroScreen">
+  <nav class="reg-nav">
+    <div class="brand">ShipBuy- By Roosevelt</div>
+    <button class="back-btn" onclick="hideRegistro()">← Volver al inicio</button>
+  </nav>
+  <div class="reg-main">
+    <div class="reg-card">
+      <div class="reg-header">
+        <div class="reg-badge"><span class="reg-badge-dot"></span>Registro gratuito</div>
+        <h2 class="reg-title">Crea tu cuenta</h2>
+        <p class="reg-sub">Regístrate y empieza a recibir tus productos favoritos donde estés.</p>
+        <div class="reg-steps">
+          <div class="rsd active" id="rsd1">1</div>
+          <div class="rsl" id="rsl1"></div>
+          <div class="rsd idle" id="rsd2">2</div>
+          <div class="rsl" id="rsl2"></div>
+          <div class="rsd idle" id="rsd3">✓</div>
+        </div>
+      </div>
+      <div class="reg-body">
+
+        <!-- STEP 1 -->
+        <div id="rstep1">
+          <div class="sec-div"><span>Información personal</span></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Nombre completo <span style="color:var(--accent)">*</span></label>
+              <input class="form-input" id="rr-nombre" placeholder="Juan García" type="text">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Cédula / ID <span style="color:var(--accent)">*</span></label>
+              <input class="form-input" id="rr-cedula" placeholder="8-123-4567" type="text">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Teléfono <span style="color:var(--accent)">*</span></label>
+              <input class="form-input" id="rr-telefono" placeholder="+507 6000-0000" type="tel">
+            </div>
+            <div class="form-group">
+              <label class="form-label">WhatsApp <span style="color:var(--accent)">*</span></label>
+              <input class="form-input" id="rr-whatsapp" placeholder="+507 6000-0000" type="tel">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Correo electrónico <span style="color:var(--accent)">*</span></label>
+            <input class="form-input" id="rr-correo" placeholder="correo@ejemplo.com" type="email">
+          </div>
+          <button class="btn-reg" onclick="rGoStep2()">Continuar →</button>
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="rstep2" style="display:none">
+          <div class="sec-div"><span>Dirección de entrega</span></div>
+          <div class="form-group">
+            <label class="form-label">Provincia <span style="color:var(--accent)">*</span></label>
+            <select class="form-input" id="rr-provincia">
+              <option value="">— Selecciona tu provincia —</option>
+              <option>Chiriquí</option><option>Veraguas</option><option>Coclé</option>
+              <option>Herrera</option><option>Los Santos</option><option>Colón</option>
+              <option>Darién</option><option>Bocas del Toro</option><option>Panamá Oeste</option><option>Otra</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Dirección exacta <span style="color:var(--accent)">*</span></label>
+            <input class="form-input" id="rr-direccion" placeholder="Barrio, calle, corregimiento, referencias...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Punto de referencia adicional</label>
+            <input class="form-input" id="rr-referencia" placeholder="Ej: frente al parque, al lado del banco...">
+          </div>
+          <div class="reg-hint">
+            📦 Servicio desde <strong>$20.00</strong> por compra en un mismo local (hasta 10 productos). Productos adicionales: <strong>$2.00 c/u</strong>.
+          </div>
+          <button class="btn-reg" id="rSubmitBtn" onclick="rSubmit()">✅ Crear mi cuenta</button>
+          <button class="btn-reg-ghost" onclick="rGoStep1()">← Atrás</button>
+        </div>
+
+        <!-- SUCCESS -->
+        <div id="rSuccessScreen" style="display:none">
+          <div class="reg-success">
+            <div class="reg-success-icon">🎉</div>
+            <h2>¡Registro exitoso!</h2>
+            <p>Tu cuenta ha sido creada. Guarda tu código y compártelo al hacer un pedido.</p>
+            <div class="reg-code-box" id="rRegCode">SB-CLI-000000</div>
+            <p style="font-size:.82rem;color:var(--muted);margin-bottom:20px;">Correo de bienvenida enviado a <strong id="rRegEmail" style="color:var(--text)"></strong></p>
+            <button class="btn-reg" style="max-width:280px;margin:0 auto;display:block" onclick="rReset()">Registrar otro cliente</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="reg-footer">© 2025 ShipBuy- By Roosevelt — Llevamos la ciudad hasta donde estás</div>
 </div>
 
 <!-- ══════════════════════════════ ADMIN ══════════════════════════════ -->
@@ -986,6 +1133,128 @@ function toast(msg, type='success'){
 
 // ═══════════════════ SIDEBAR ═══════════════════
 function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); }
+
+// ═══════════════════ REGISTRO PÚBLICO ═══════════════════
+function showRegistro(){
+  document.getElementById('registroScreen').classList.add('show');
+  rReset();
+}
+function hideRegistro(){
+  document.getElementById('registroScreen').classList.remove('show');
+}
+
+function rGoStep2(){
+  const nombre   = document.getElementById('rr-nombre').value.trim();
+  const cedula   = document.getElementById('rr-cedula').value.trim();
+  const telefono = document.getElementById('rr-telefono').value.trim();
+  const whatsapp = document.getElementById('rr-whatsapp').value.trim();
+  const correo   = document.getElementById('rr-correo').value.trim();
+  if(!nombre||!cedula||!telefono||!whatsapp||!correo){
+    toast('Completa todos los campos obligatorios','error'); return;
+  }
+  if(!correo.includes('@')){ toast('Ingresa un correo válido','error'); return; }
+  document.getElementById('rstep1').style.display='none';
+  document.getElementById('rstep2').style.display='block';
+  document.getElementById('rsd1').className='rsd done'; document.getElementById('rsd1').textContent='✓';
+  document.getElementById('rsl1').className='rsl done';
+  document.getElementById('rsd2').className='rsd active';
+}
+
+function rGoStep1(){
+  document.getElementById('rstep2').style.display='none';
+  document.getElementById('rstep1').style.display='block';
+  document.getElementById('rsd1').className='rsd active'; document.getElementById('rsd1').textContent='1';
+  document.getElementById('rsl1').className='rsl';
+  document.getElementById('rsd2').className='rsd idle';
+}
+
+function rSubmit(){
+  const provincia  = document.getElementById('rr-provincia').value;
+  const direccion  = document.getElementById('rr-direccion').value.trim();
+  if(!provincia||!direccion){ toast('Completa la provincia y dirección','error'); return; }
+
+  const nombre     = document.getElementById('rr-nombre').value.trim();
+  const cedula     = document.getElementById('rr-cedula').value.trim();
+  const telefono   = document.getElementById('rr-telefono').value.trim();
+  const whatsapp   = document.getElementById('rr-whatsapp').value.trim();
+  const correo     = document.getElementById('rr-correo').value.trim();
+  const referencia = document.getElementById('rr-referencia').value.trim();
+  const codigo     = 'SB-CLI-'+Math.floor(100000+Math.random()*900000);
+
+  const btn = document.getElementById('rSubmitBtn');
+  btn.disabled=true; btn.textContent='Registrando...';
+
+  // Agregar cliente al panel admin automáticamente
+  db.clientes.push({
+    id: db.nextId.clientes++,
+    nombre, telefono, correo,
+    cedula, whatsapp,
+    provincia, direccion,
+    referencia: referencia||'',
+    pedidos: 0,
+    codigo
+  });
+  renderAll();
+
+  // Enviar correo de bienvenida al cliente
+  ejsSend({
+    to_name  : nombre,
+    to_email : correo,
+    reply_to : 'soluciones.tecnologica.pa@gmail.com',
+    from_name: 'ShipBuy- By Roosevelt',
+    codigo   : codigo,
+    monto    : '$0.00',
+    metodo   : 'Bienvenida',
+    fecha    : new Date().toLocaleDateString('es-PA'),
+    message  : '¡Bienvenido/a a ShipBuy! Tu código de cliente es: ' + codigo +
+               '. Provincia: ' + provincia + '. WhatsApp: ' + whatsapp
+  }).catch(()=>{});
+
+  // Notificar al admin
+  ejsSend({
+    to_name  : 'Administrador',
+    to_email : 'soluciones.tecnologica.pa@gmail.com',
+    reply_to : correo,
+    from_name: 'ShipBuy Registro',
+    codigo   : codigo,
+    monto    : '$0.00',
+    metodo   : 'Nuevo cliente registrado',
+    fecha    : new Date().toLocaleDateString('es-PA'),
+    message  : 'NUEVO CLIENTE: ' + nombre +
+               ' | Cédula: ' + cedula +
+               ' | Tel: ' + telefono +
+               ' | WA: ' + whatsapp +
+               ' | Correo: ' + correo +
+               ' | Provincia: ' + provincia +
+               ' | Dirección: ' + direccion +
+               (referencia ? ' | Ref: ' + referencia : '')
+  }).catch(()=>{});
+
+  // Mostrar éxito
+  document.getElementById('rstep2').style.display='none';
+  document.getElementById('rSuccessScreen').style.display='block';
+  document.getElementById('rRegCode').textContent = codigo;
+  document.getElementById('rRegEmail').textContent = correo;
+  document.getElementById('rsd2').className='rsd done'; document.getElementById('rsd2').textContent='✓';
+  document.getElementById('rsl2').className='rsl done';
+  document.getElementById('rsd3').className='rsd done';
+  btn.disabled=false; btn.textContent='✅ Crear mi cuenta';
+}
+
+function rReset(){
+  ['rr-nombre','rr-cedula','rr-telefono','rr-whatsapp','rr-correo','rr-direccion','rr-referencia'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+  const prov=document.getElementById('rr-provincia'); if(prov) prov.value='';
+  document.getElementById('rstep1').style.display='block';
+  document.getElementById('rstep2').style.display='none';
+  document.getElementById('rSuccessScreen').style.display='none';
+  document.getElementById('rsd1').className='rsd active'; document.getElementById('rsd1').textContent='1';
+  document.getElementById('rsd2').className='rsd idle'; document.getElementById('rsd2').textContent='2';
+  document.getElementById('rsd3').className='rsd idle'; document.getElementById('rsd3').textContent='✓';
+  document.getElementById('rsl1').className='rsl';
+  document.getElementById('rsl2').className='rsl';
+}
 </script>
 </body>
 </html>
